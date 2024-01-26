@@ -3,7 +3,6 @@ import numpy as np
 import pickle
 import os
 import sys
-
 from src.exception import CustomException
 from src.logger import logging
 
@@ -53,16 +52,5 @@ def load_object(file_path):
     
 
 
-def export_collection_as_dataframe(collection_name, db_name):
-    try:
-        mongo_client = MongoClient(os.getenv("MONGO_DB_URL"))
 
-        collection = mongo_client[db_name][collection_name]
-
-        df = pd.DataFrame(list(collection.find()))
-
-        return df
-
-    except Exception as e:
-        raise CustomException(e, sys)
 
