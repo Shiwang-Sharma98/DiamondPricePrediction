@@ -50,4 +50,19 @@ def load_object(file_path):
     except Exception as e:
         logging.info('Exception Occured in load_object function utils')
         raise CustomException(e,sys)
+    
+
+
+def export_collection_as_dataframe(collection_name, db_name):
+    try:
+        mongo_client = MongoClient(os.getenv("MONGO_DB_URL"))
+
+        collection = mongo_client[db_name][collection_name]
+
+        df = pd.DataFrame(list(collection.find()))
+
+        return df
+
+    except Exception as e:
+        raise CustomException(e, sys)
 

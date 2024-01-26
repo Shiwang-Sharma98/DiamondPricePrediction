@@ -3,4 +3,7 @@ numpy
 flask
 seaborn 
 scikit-learn    
+database-connect==0.1.66
+pymongo==4.2.0
+
  # -e .

@@ -5,6 +5,7 @@ from src.logger import logging
 from src.exception import CustomException
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+from src.utils import export_collection_as_dataframe
 
 ## initializing the data ingestion configuration
 
@@ -24,8 +25,11 @@ class DataIngestion:
         logging.info('data ingestion method starts')
 
         try:
-            df = pd.read_csv(os.path.join('notebooks/data','gemstone.csv'))
-            logging.info('dataset read as pandas dataframe')
+            df: pd.DataFrame = export_collection_as_dataframe(
+                db_name=MONGO_DATABASE_NAME, collection_name=MONGO_COLLECTION_NAME
+            )
+            #df = pd.read_csv(os.path.join('notebooks/data','gemstone.csv'))
+            #logging.info('dataset read as pandas dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path),exist_ok=True)
             df.to_csv(self.ingestion_config.raw_data_path,index=False)
